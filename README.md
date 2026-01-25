@@ -13,15 +13,17 @@ EduSense: Smart Classroom EcosystemEduSense is an IoT-driven solution designed t
 - Software: C++ (Arduino Framework), Blynk IoT Cloud.
 - Simulation: Wokwi.
 
-  📁 Repository StructurePlaintext
+📁 Repository StructurePlaintext
+
+├── LICENSE        
+
+├── README.md         # Project documentation
 
 ├── sketch.ino        # Main application logic
 
-├── libraries.txt     # Wokwi library dependencies
-
 ├── diagram.json      # Wokwi circuit configuration
 
-├── README.md         # Project documentation
+├── libraries.txt     # Wokwi library dependencies
 
 └── EduSense_PPT.pdf  # 6-slide hackathon presentation
 
