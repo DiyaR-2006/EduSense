@@ -17,15 +17,15 @@ EduSense: Smart Classroom EcosystemEduSense is an IoT-driven solution designed t
 
 ├── LICENSE        
 
-├── README.md         # Project documentation
+├── README.md          # Project documentation
 
-├── sketch.ino        # Main application logic
+├── sketch.ino         # Main application logic
 
-├── diagram.json      # Wokwi circuit configuration
+├── diagram.json       # Wokwi circuit configuration
 
-├── libraries.txt     # Wokwi library dependencies
+├── libraries.txt      # Wokwi library dependencies
 
-└── EduSense_PPT.pdf  # 6-slide hackathon presentation
+└── EduSense_PPT.pdf   # 6-slide hackathon presentation
 
 ⚙️ Setup & Installation
 - Blynk Setup:Create a new Template in Blynk.Define Datastreams (V0-V12) for sensors and actuators.
