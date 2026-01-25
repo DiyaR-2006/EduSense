@@ -9,14 +9,20 @@ EduSense: Smart Classroom EcosystemEduSense is an IoT-driven solution designed t
 - Automation: Servo-controlled "Presentation Mode" to dim lights and lower projector screens with a single tap.
 
 🛠️ Tech Stack
-- Hardware: ESP32, DHT22, HC-SR501 (PIR), MQ-2 (Smoke), SG90 Servo, 5V Relay.Software: C++ (Arduino Framework), Blynk IoT Cloud.
+- Hardware: ESP32, DHT22, HC-SR501 (PIR), MQ-2 (Smoke), SG90 Servo, 5V Relay.
+- Software: C++ (Arduino Framework), Blynk IoT Cloud.
 - Simulation: Wokwi.
 
   📁 Repository StructurePlaintext
+
 ├── sketch.ino        # Main application logic
+
 ├── libraries.txt     # Wokwi library dependencies
+
 ├── diagram.json      # Wokwi circuit configuration
+
 ├── README.md         # Project documentation
+
 └── EduSense_PPT.pdf  # 6-slide hackathon presentation
 
 ⚙️ Setup & Installation
