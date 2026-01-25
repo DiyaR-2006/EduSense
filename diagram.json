@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "author": "Kanchan",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": -19.38,
+      "left": 215.77,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -134.1,
+      "left": -120.6,
+      "attrs": { "temperature": "80", "humidity": "4" }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -111.2,
+      "left": -45.78,
+      "attrs": {}
+    },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 21.9, "left": -290.6, "attrs": {} },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -122.4,
+      "left": 59.4,
+      "attrs": { "volume": "0.1" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": 115.4, "left": 432, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:6", "dht1:SDA", "green", [ "h0" ] ],
+    [ "esp:7", "pir1:OUT", "green", [ "h0" ] ],
+    [ "esp:4", "gas1:AOUT", "green", [ "h0" ] ],
+    [ "bz1:2", "esp:13", "green", [ "v0" ] ],
+    [ "esp:12", "relay1:IN", "green", [ "h0" ] ],
+    [ "dht1:VCC", "esp:3V3.1", "red", [ "v0" ] ],
+    [ "pir1:VCC", "esp:3V3.1", "red", [ "v0" ] ],
+    [ "bz1:1", "esp:GND.4", "green", [ "v249.6", "h220.8" ] ],
+    [ "pir1:GND", "esp:GND.4", "black", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.4", "black", [ "v0" ] ],
+    [ "esp:5V", "gas1:VCC", "red", [ "h0" ] ],
+    [ "gas1:GND", "esp:GND.4", "black", [ "h38.4", "v220", "h460.8" ] ],
+    [ "relay1:VCC", "esp:3V3.1", "red", [ "h-48", "v-172.8", "h-201.6" ] ],
+    [ "relay1:GND", "esp:GND.4", "black", [ "h-48", "v47.6" ] ]
+  ],
+  "dependencies": {}
+}
