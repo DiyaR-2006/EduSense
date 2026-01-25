@@ -1,0 +1,2 @@
+# EduSense
+Smart Classroom Ecosystem 
