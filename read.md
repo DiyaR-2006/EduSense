@@ -1,4 +1,4 @@
-# EduSmart Classroom Controller (ESP32-S3)
+# EduSense Classroom Controller (ESP32-S3)
 
 An IoT-enabled smart classroom system designed for energy efficiency and safety.
 
