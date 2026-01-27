@@ -56,15 +56,13 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
   
 ## 📁 Repository StructurePlaintext
 
-├──Codezen 2026 ppt.pdf ##TEMPLATE FOR PPT
+├──Codezen 2026 ppt.pdf  #TEMPLATE FOR PPT
 
 ├── LICENSE        
 
 ├── README.md          # Project documentation
 
-├── OFFLINE-libraries.txt      # Wokwi library dependencies when wifi not available 
-
-├── ONLINE-libraries.txt      # Wokwi library dependencies when wifi available
+├── libraries.txt      # Wokwi library dependencies
 
 ├── OFFLINE-sketch.ino         # Main application logic when system not connected with wifi 
 
