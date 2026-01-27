@@ -1,10 +1,10 @@
 ## EduSense
 Smart Classroom Ecosystem (ESP32-S3)
 An IoT-enabled smart classroom system designed for energy efficiency and safety.
-EduSense is an IoT-driven solution designed to optimize the learning environment by monitoring CO levels, temperature, and lighting while automating energy consumption. This project leverages the ESP32 microcontroller and Blynk IoT cloud to create a sustainable, responsive classroom.
+EduSense is an IoT-driven solution designed to optimize the learning environment by monitoring Carbon Dioxide levels, temperature, and lighting while automating energy consumption. This project leverages the ESP32 microcontroller and Blynk IoT cloud to create a sustainable and responsive classroom.
 
 ## 🌟 Key Features
-- **Climate Control**: Auto-activates Fan/AC based on DHT22 thresholds.
+- **Climate Control**: Auto-activates Fan based on DHT22 thresholds.
 - **Occupancy Lighting**: PIR-based energy saving.
 - **Safety**: Real-time MQ-2 smoke monitoring with audible alarms.
 - **Cloud Integration**: Blynk IoT Dashboard for remote telemetry and manual control.
@@ -49,7 +49,7 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
   --Copy your Template ID and Auth Token.
 - Wokwi Simulation:
 - Open the diagram.json and sketch.ino in Wokwi.
-- Paste your Blynk credentials at the top of the sketch.Ensure libraries.txt includes: Blynk, DHT sensor library, and ESP32Servo.
+- Paste your Blynk credentials at the top of the sketch. Ensure libraries.txt includes:Blynk, DHT sensor library.
 - Run: Click the "Play" button in Wokwi and monitor the data on your Blynk mobile app.
 
 📈 Future Scope
