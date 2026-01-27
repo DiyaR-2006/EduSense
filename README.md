@@ -72,4 +72,7 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 
 └── EduSense_PPT.pdf   # 6-slide hackathon presentation
 
-**// END OF DOCUMENTATION //**
+
+
+
+## **END OF DOCUMENTATION**
