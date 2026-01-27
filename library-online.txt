@@ -1,4 +1,0 @@
-# Wokwi Library List
-
-Blynk
-DHT sensor library
