@@ -43,9 +43,12 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 - `LiquidCrystal I2C`
 
 ⚙️ Setup & Installation
-- Blynk Setup:Create a new Template in Blynk.Define Datastreams (V0-V12) for sensors and actuators.
-- Copy your Template ID and Auth Token.
-- Wokwi Simulation:Open the diagram.json and sketch.ino in Wokwi.
+- Blynk Setup:
+  --Create a new Template in Blynk.
+  --Define Datastreams (V0-V12) for sensors and actuators.
+  --Copy your Template ID and Auth Token.
+- Wokwi Simulation:
+- Open the diagram.json and sketch.ino in Wokwi.
 - Paste your Blynk credentials at the top of the sketch.Ensure libraries.txt includes: Blynk, DHT sensor library, and ESP32Servo.
 - Run: Click the "Play" button in Wokwi and monitor the data on your Blynk mobile app.
 
