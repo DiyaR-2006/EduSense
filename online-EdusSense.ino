@@ -1,9 +1,7 @@
 /**
- * @file Smart_Classroom_Blynk.ino
- * @author Your Name / GitHub Username
- * @brief IoT-based Smart Classroom Environment Controller using ESP32 & Blynk.
- * @version 1.2
- * @date 2026-01-29
+ * @file Offline-EduSense.ino
+ * @brief An automated environmental monitoring and safety system using ESP32-S3-WROOM.
+ * @version 1.0
  * * Features:
  * - Real-time Environmental Telemetry (Temp/Hum/Smoke)
  * - Motion-based Automated Lighting & Occupancy Tracking
