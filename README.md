@@ -1,24 +1,24 @@
 ## EduSense
 Smart Classroom Ecosystem (ESP32-S3)
 An IoT-enabled smart classroom system designed for energy efficiency and safety.
-EduSense is an IoT-driven solution designed to optimize the learning environment by monitoring Carbon Dioxide levels, temperature, and lighting while automating energy consumption. This project leverages the ESP32 microcontroller and Blynk IoT cloud to create a sustainable and responsive classroom.
+EduSense is an IoT-driven solution designed to optimize the learning environment by monitoring AQI and smoke alert, temperature, and lighting while automating energy consumption. This project leverages the ESP32 microcontroller and Blynk IoT cloud to create a sustainable and responsive classroom.
 
 ## Key Features
 - **Climate Control**: Auto-activates Fan based on DHT22 thresholds.
 - **Occupancy Lighting**: PIR-based energy saving.
-- **Safety**: Real-time MQ-2 smoke monitoring with audible alarms.
+- **Safety**: Real-time MQ-2 smoke monitoring with audible alarms used as proxy for simulation.
 - **Cloud Integration**: Blynk IoT Dashboard for remote telemetry and manual control.
 
   
 ## Hardware Setup
-- **Microcontroller**: ESP32-S3
+- **Microcontroller**: ESP32-S3-wroom
 - **Sensors**: DHT22, PIR, MQ-2 (Analog)
 - **Actuators**: Relay, LED, Active Buzzer
 - **Display**: 16x2 I2C LCD (Offline version)
 
 ## Software
 - C++ (Arduino Framework)
-- Blynk IoT Cloud.
+- Blynk IoT Cloud (Online version)
 - Wokwi (Simulation)
 
 ## Wiring (ESP32-S3)
@@ -32,7 +32,7 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 ## Blynk Datastreams
 - V0: Temperature
 - V1: Humidity
-- V2: CO2/Smoke
+- V2: AQI/Smoke
 - V5: Occupancy
 - V7: Light Switch
 - V8: Fan Switch
@@ -59,23 +59,23 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
   
 ## 📁 Repository StructurePlaintext
 
-├──Codezen 2026 ppt.pdf  #TEMPLATE FOR PPT
+├──Codezen 2026 ppt.pdf    #TEMPLATE FOR PPT
 
 ├── LICENSE        
 
-├── README.md          # Project documentation
+├── README.md            # Project documentation
 
-├── libraries.txt      # Wokwi library dependencies
+├── libraries.txt        # Wokwi library dependencies
 
-├── OFFLINE-sketch.ino         # Main application logic when system not connected with wifi 
+├── OFFLINE-sketch.ino           # Main application logic when system not connected with wifi 
 
-├── ONLINE-sketch.ino         # Main application logic when system connected with wifi 
+├── ONLINE-sketch.ino           # Main application logic when system connected with wifi 
 
-├── OFFLINE-diagram.json       # Wokwi circuit configurations
+├── OFFLINE-diagram.json         # Wokwi circuit configurations
 
-├── ONLINE-diagram.json       # Wokwi circuit configurations
+├── ONLINE-diagram.json         # Wokwi circuit configurations
 
-└── EduSense_PPT.pdf   # 6-slide hackathon presentation
+└── sync&sense.pdf     # 6-slide hackathon presentation
 
 
 
