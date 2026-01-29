@@ -75,7 +75,7 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 
 ├── ONLINE-diagram.json         # Wokwi circuit configurations
 
-└── sync&sense.pdf     # 6-slide hackathon presentation
+└── Sync & Sense.pdf     # 6-slide hackathon presentation
 
 
 
