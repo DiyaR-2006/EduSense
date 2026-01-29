@@ -18,65 +18,53 @@
 #include <BlynkSimpleEsp32.h>
 #include <DHT.h>
 
-/* -------- NETWORK CREDENTIALS -------- */
+/* -------- WIFI AND BLYNK SETTINGS -------- */
 char auth[] = "B8kkS8CkwuwGIvimt13ARy2qsAti2jbP"; 
 char ssid[] = "Wokwi-GUEST";     
 char pass[] = "";                
 
-/* -------- PINOUT CONFIGURATION -------- */
-#define DHT_PIN      18   // DHT22 Data Pin
-#define PIR_PIN      7    // Passive Infrared Sensor (Motion)
-#define SMOKE_PIN    4    // MQ Gas Sensor (Analog)
-#define RELAY_PIN    12   // Fan/Ventilation Relay
-#define BUZZER_PIN   13   // Safety Alarm Buzzer
-#define LED_PIN      15   // Smart Lighting Output
+/* -------- PIN CONNECTIONS -------- */
+#define DHT_PIN      18   // Temp & Humidity sensor
+#define PIR_PIN      7    // Motion sensor
+#define SMOKE_PIN    4    // Smoke sensor
+#define RELAY_PIN    12   // Fan control
+#define BUZZER_PIN   13   // Alarm sound
+#define LED_PIN      15   // Classroom light
 
 #define DHT_TYPE     DHT22
-#define TEMP_LIMIT   25   // Temperature activation threshold
-#define HUM_LIMIT    50   // Humidity activation threshold
-#define SMOKE_LIMIT  1000 // Smoke alert threshold
+#define TEMP_LIMIT   25
+#define HUM_LIMIT    50
+#define SMOKE_LIMIT  1000
 
-/* -------- OBJECTS -------- */
 DHT dht(DHT_PIN, DHT_TYPE);
-BlynkTimer timer;          // Manages cloud update intervals
-int occupancyCount = 0;    // Tracks room usage
+BlynkTimer timer;
+int occupancyCount = 0;
 
-/* -------- BLYNK DASHBOARD HANDLERS -------- */
+/* -------- REMOTE BUTTONS (FROM APP) -------- */
 
-/**
- * @brief Manual Light Override (V7)
- */
+// Button to turn Light ON/OFF manually
 BLYNK_WRITE(V7) {
   int pinValue = param.asInt();
   digitalWrite(LED_PIN, pinValue);
-  Serial.printf("Remote Light Toggle: %s\n", pinValue ? "ON" : "OFF");
 }
 
-/**
- * @brief Manual Fan Override (V8)
- */
+// Button to turn Fan ON/OFF manually
 BLYNK_WRITE(V8) {
   int pinValue = param.asInt();
   digitalWrite(RELAY_PIN, pinValue);
-  Serial.printf("Remote Fan Toggle: %s\n", pinValue ? "ON" : "OFF");
 }
 
-/**
- * @brief Sends sensor data to Blynk Cloud every 2 seconds.
- * Prevents network congestion while maintaining real-time updates.
- */
+/* -------- SEND DATA TO Blynk -------- */
 void pushTelemetry() {
   float t = dht.readTemperature();
   float h = dht.readHumidity();
   int s = analogRead(SMOKE_PIN);
 
   if (!isnan(t) && !isnan(h)) {
-    Blynk.virtualWrite(V0, t); // Temp -> V0
-    Blynk.virtualWrite(V1, h); // Hum -> V1
+    Blynk.virtualWrite(V0, t); // Send Temp to V0
+    Blynk.virtualWrite(V1, h); // Send Humidity to V1
   }
-  Blynk.virtualWrite(V2, s);   // Smoke -> V2
-  
-  Serial.printf("Telemetry Update - T:%.1f | H:%.0f | S:%d\n", t, h, s);
+  Blynk.virtualWrite(V2, s);   // Send Gas levels to V2
 }
 
 void setup() {
@@ -88,55 +76,52 @@ void setup() {
   pinMode(RELAY_PIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
 
-  // Initialize Network Connection
   Blynk.begin(auth, ssid, pass);
 
-  // Define telemetry interval (2000ms)
+  // Send sensor data to the app every 2 seconds
   timer.setInterval(2000L, pushTelemetry);
-  
-  Serial.println("System Initialized and Online");
 }
 
 void loop() {
-  Blynk.run(); // Process Cloud commands
-  timer.run(); // Process timed events
+  Blynk.run(); // Keep Blynk connected
+  timer.run(); // Keep the timer running
 
-  /* 1. CLIMATE AUTOMATION LOGIC */
+  // 1. AUTOMATIC FAN CONTROL
   float t = dht.readTemperature();
   float h = dht.readHumidity();
   
-  // Trigger Ventilation if environmental safety limits are exceeded
   if (!isnan(t) && (t > TEMP_LIMIT || h > HUM_LIMIT)) {
-    digitalWrite(RELAY_PIN, HIGH);
-    Serial.println("System Alert: Fan activated (Threshold Exceeded)");
-    delay(5000);  // Prevent relay "chatter" or rapid cycling
+    digitalWrite(RELAY_PIN, HIGH); // Turn Fan ON
+    Serial.println("Fan ON");
+    delay(5000); 
   } else {
-    digitalWrite(RELAY_PIN, LOW);   
+    digitalWrite(RELAY_PIN, LOW);  // Turn Fan OFF
   }
 
-  /* 2. OCCUPANCY & SMART LIGHTING LOGIC */
+  // 2. MOTION AND LIGHT CONTROL
   int motion = digitalRead(PIR_PIN);
+  
   if (motion == HIGH) {
     Serial.println("Motion Detected - Light ON");
     digitalWrite(LED_PIN, HIGH);
     
-    // Increment total visitor count for cloud analytics
+    // Count how many times motion was detected
     occupancyCount++;
-    Blynk.virtualWrite(V5, occupancyCount);
+    Blynk.virtualWrite(V5, occupancyCount); // Update count on Blynk
     
-    delay(3000);   // Maintain light for visibility
+    delay(10000); // Keep light on for 3 seconds
   } else {
     digitalWrite(LED_PIN, LOW);
-    Serial.println("No motion - Energy Saving Mode");
+    Serial.println("No motion - Light OFF");
     delay(100);
   }
 
-  /* 3. SAFETY & EMERGENCY LOGIC */
+  // 3. SMOKE ALARM
   int smokeVal = analogRead(SMOKE_PIN);
   if (smokeVal > SMOKE_LIMIT) {
-    tone(BUZZER_PIN, 1000); // Trigger local high-pitched alarm
-    Serial.println("CRITICAL: Smoke Detected!");
+    tone(BUZZER_PIN, 1000); // Start alarm sound
+    Serial.println("SMOKE ALERT!");
   } else {
-    noTone(BUZZER_PIN);
+    noTone(BUZZER_PIN);    // Stop alarm sound
   }
 }
