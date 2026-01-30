@@ -14,129 +14,111 @@
 #include <LiquidCrystal_I2C.h>
 #include <DHT.h>
 
-/* ----------------- HARDWARE MAPPING ----------------- */
-// I2C Interface
-#define I2C_SDA      8    
-#define I2C_SCL      9    
+/* -------- SYSTEM CONFIGURATION -------- */
+#define I2C_SDA     8    
+#define I2C_SCL     9    
+#define DHT_PIN     18   
+#define PIR_PIN     7    
+#define SMOKE_PIN   4    
+#define RELAY_PIN   12   // Controls fans (relay used for simulation)
+#define BUZZER_PIN  13   // Audible alarm for safety critical alerts
+#define LED_PIN     15   // Visual feedback for occupancy
 
-// Digital & Analog Sensors
-#define DHT_PIN      18   
-#define PIR_PIN      7    
-#define SMOKE_PIN    4    
+#define DHT_TYPE    DHT22
+#define SMOKE_LIMIT 1000  // Threshold for automated smoke control
+#define TEMP_LIMIT  25   // Threshold for automated temperature control
+#define HUM_LIMIT   50  // Threshold for automated humidity control
 
-// Actuators (Outputs)
-#define RELAY_PIN    12   // Controls high-voltage fans/AC
-#define BUZZER_PIN   13   // Safety alarm
-#define LED_PIN      15   // Smart lighting
+// Initialize Hardware Interfaces
 
-/* ----------------- SYSTEM THRESHOLDS ----------------- */
-#define DHT_TYPE     DHT22
-#define SMOKE_LIMIT  1000  // Sensitivity threshold for gas/smoke
-#define TEMP_LIMIT   25    // Target max temperature (°C)
-#define HUM_LIMIT    50    // Target max humidity (%)
-
-// Component Initialization
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 DHT dht(DHT_PIN, DHT_TYPE);
 
-/**
- * @brief Standard Arduino Setup Function
- */
 void setup() {
   Serial.begin(115200);
   
-  // Initialize Communication Protocols
+  // Initialize I2C communication for LCD
+
   Wire.begin(I2C_SDA, I2C_SCL);
   lcd.init();
   lcd.backlight();
   dht.begin();
 
-  // Configure Pin Modes
+  // Define I/O for sensors 
+
   pinMode(PIR_PIN, INPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(RELAY_PIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
 
-  // Power-On Self Test (POST)
-  lcd.print("SYSTEM STARTING");
-  delay(2000); 
+  // System Health Check
+  lcd.print("Initializing...");
+  delay(2000); // Sensor stabilisation 
   lcd.clear();
 }
 
-/**
- * @brief Main Execution Loop
- */
 void loop() {
-  // 1. Data Acquisition
+  /* -------- DATA ACQUISITION -------- */
+
   int smokeValue = analogRead(SMOKE_PIN);
-  int motionDetected = digitalRead(PIR_PIN);
-  float temperature = dht.readTemperature();
-  float humidity = dht.readHumidity();
+  int motion = digitalRead(PIR_PIN);
+  float temp = dht.readTemperature();
+  float hum = dht.readHumidity();
   
-  // 2. Occupancy & Lighting Control Logic
-  handleLighting(motionDetected);
+  /* -------- MOTION & LIGHTING LOGIC -------- */
+  // Implements occupancy-based energy saving
 
-  // 3. Environmental & Climate Control
-  handleClimate(temperature, humidity);
-
-  // 4. Safety Monitor & Visual Feedback
-  updateDisplay(temperature, humidity, smokeValue);
-
-  // Global loop timing (DHT22 requires ~2s between reads)
-  delay(2000); 
-}
-
-/* ----------------- MODULAR FUNCTIONS ----------------- */
-
-/**
- * @brief Manages energy-saving lighting based on PIR detection.
- */
-void handleLighting(int motion) {
   if (motion == HIGH) {
+    Serial.println("Motion Detected - Light ON");
     digitalWrite(LED_PIN, HIGH);
-    Serial.println("[MOTION] Occupancy detected: Lights ON");
-    // Extra delay within logic if specific dwell time is required
+    delay(3000);   // Maintain light for visibility
   } else {
     digitalWrite(LED_PIN, LOW);
+    Serial.println("No motion - Energy Saving Mode");
+    delay(100);
   }
-}
 
-/**
- * @brief Logic for triggering relay-based cooling systems.
- */
-void handleClimate(float t, float h) {
-  if (isnan(t) || isnan(h)) return; // Skip if sensor error
+  /* -------- CLIMATE CONTROL LOGIC -------- */
+  // Validation check: Ensure sensor data is valid before processing
 
-  if (t > TEMP_LIMIT || h > HUM_LIMIT) {
-    digitalWrite(RELAY_PIN, HIGH);
-    Serial.printf("[CLIMATE] Active | Temp: %.1fC | Hum: %.1f%%\n", t, h);
-  } else {
-    digitalWrite(RELAY_PIN, LOW);
-  }
-}
+  if (!isnan(temp) && !isnan(hum)) {
+    Serial.print("Temp: "); Serial.print(temp);
+    Serial.print(" | Hum: "); Serial.println(hum);
 
-/**
- * @brief Updates LCD and handles safety buzzer logic.
- */
-void updateDisplay(float t, float h, int smoke) {
-  // Row 0: Telemetry
+    // Automated Cooling Trigger (Using Relay): Activates if Temp OR Humidity exceeds safety limits
+
+    if (temp > TEMP_LIMIT || hum > HUM_LIMIT) {
+      digitalWrite(RELAY_PIN, HIGH);
+      Serial.println("FANS - ON ");
+      delay(5000);  // Prevents rapid relay cycling (chatter)
+    } else {
+      digitalWrite(RELAY_PIN, LOW);   
+    }
+  } 
+
+  /* -------- USER INTERFACE & SAFETY ALERTS -------- */
+  
+  // Row 0: Environmental Telemetry
+
   lcd.setCursor(0, 0);
-  if (isnan(t) || isnan(h)) {
-    lcd.print("ERR: DHT SENSOR");
+  if (isnan(temp) || isnan(hum)) {
+    lcd.print("Sensor Error   "); 
   } else {
-    lcd.print("T:"); lcd.print(t, 1);
-    lcd.print("C  H:"); lcd.print(h, 0);
+    lcd.print("T:"); lcd.print(temp, 1);
+    lcd.print("C  H:"); lcd.print(hum, 0);
     lcd.print("% ");
   }
 
-  // Row 1: Safety Status
+  // Row 1: Safety Critical Status
   lcd.setCursor(0, 1);
-  if (smoke > SMOKE_LIMIT) {
-    lcd.print("** SMOKE ALERT **");
-    tone(BUZZER_PIN, 1000);
-    Serial.println("[DANGER] Smoke threshold exceeded!");
+  if (smokeValue > SMOKE_LIMIT) {
+    lcd.print("ALERT: SMOKE!   ");
+    tone(BUZZER_PIN, 1000); // High-frequency emergency tone
   } else {
-    lcd.print("System: Secured ");
+    lcd.print("Status: Safe    ");
     noTone(BUZZER_PIN);
   }
+
+  // Frequency control for DHT22 stability
+  delay(2000); 
 }
