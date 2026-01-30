@@ -54,7 +54,7 @@ BLYNK_WRITE(V8) {
   digitalWrite(RELAY_PIN, pinValue);
 }
 
-/* -------- SEND DATA TO Blynk -------- */
+/* -------- SEND DATA TO BLYNK -------- */
 void pushTelemetry() {
   float t = dht.readTemperature();
   float h = dht.readHumidity();
@@ -64,7 +64,7 @@ void pushTelemetry() {
     Blynk.virtualWrite(V0, t); // Send Temp to V0
     Blynk.virtualWrite(V1, h); // Send Humidity to V1
   }
-  Blynk.virtualWrite(V2, s);   // Send Gas levels to V2
+  Blynk.virtualWrite(V2, s);   // Send Smoke value to V2
 }
 
 void setup() {
