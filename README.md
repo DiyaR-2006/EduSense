@@ -19,8 +19,8 @@ Unlike standard IoT prototypes, EduSense features an Offline Fail-Safe via a loc
 
   
 ## Hardware Setup
-- **Microcontroller**: ESP32-S3-wroom
-- **Sensors**: DHT22, PIR, MQ-2 (Analog)
+- **Microcontroller**: ESP32
+- **Sensors**: DHT22, PIR, MQ-2 (Used as proxy for simulation) 
 - **Actuators**: Relay (Used as proxy for simulating fan), LED, Active Buzzer
 - **Display**: 16x2 I2C LCD (Offline version)
 
