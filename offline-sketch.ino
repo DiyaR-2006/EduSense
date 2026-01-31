@@ -1,15 +1,3 @@
-/**
- * @file Offline-EduSense.ino
- * @brief An automated environmental monitoring and safety system using ESP32-S3-WROOM.
- * @version 1.0
-
- * * Features:
- * - Occupancy-based lighting control (PIR Sensor + LED)
- * - Automated Temperature and Humidity Control (DHT22 + Relay)
- * - Gas/Smoke Safety Alert (MQ-2 Sensor + Buzzer)
- * - Real-time Telemetry (I2C LCD)
- */
-
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <DHT.h>
