@@ -1,7 +1,14 @@
 ## EduSense
-Smart Classroom Ecosystem (ESP32)
-An IoT-enabled smart classroom system designed for energy efficiency and safety.
-EduSense is an IoT-driven solution designed to optimize the learning environment by monitoring AQI and smoke alert, temperature, and lighting while automating energy consumption. This project leverages the ESP32 microcontroller and Blynk IoT cloud to create a sustainable and responsive classroom.
+EduSense: An IoT-based Smart Classroom Ecosystem
+
+EduSense bridges the gap between traditional education and smart-campus sustainability. By combining ESP32-based automation with Blynk IoT connectivity, we’ve created a low-cost, zero-invasive solution for energy management and student safety.
+Unlike standard IoT prototypes, EduSense features an Offline Fail-Safe via a local LCD interface, ensuring that critical safety alerts and energy logic persist regardless of Wi-Fi stability. It’s more than a project; it’s a blueprint for the responsive campuses of tomorrow.
+
+## Quick Links
+- Live Simulation: offline: https://wokwi.com/projects/453951590301233153
+                 online : https://wokwi.com/projects/454308317695279104
+  
+- Demo Video: https://youtu.be/xOdZIc2Vr3w?si=9I6aiPIF2jCoDdSJ
 
 ## Key Features
 - **Climate Control**: Auto-activates Fan based on DHT22 thresholds.
@@ -37,48 +44,16 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 - V7: Light Switch
 - V8: Fan Switch
 
-## Libraries Required
-- `Blynk`
-- `DHT sensor library`
-- `LiquidCrystal I2C`
+## System Architecture
 
-## Setup & Installation
+1. Perception: Sensors poll environmental data and occupancy status.
+2. Edge Processing: ESP32 evaluates logic thresholds locally (Offline-ready).
+3. Communication: Data syncs to Blynk Cloud via Wi-Fi.
+4. Action: Relays toggle power, and LCD/Blynk Dashboards update in real-time.
 
-- Blynk Setup:
-  --Create a new Template in Blynk.
-  --Define Datastreams for sensors and actuators.
-  --Copy your Template ID and Auth Token.
-  
-- Wokwi Simulation:
-- Open the diagram.json and sketch.ino in Wokwi.
-- Paste your Blynk credentials at the top of the sketch. Ensure libraries.txt includes: Blynk, DHT sensor library.
-- Run: Click the "Play" button in Wokwi and monitor the data on your Blynk.
-
-## Future Scope
-- Integration of AI for predictive energy usage analytics.
-- Centralized dashboard for school-wide facility management (B2B).
-- Integrated RFID based attendance system.
-    
-## 📁 Repository StructurePlaintext
-
-├──Codezen 2026 ppt.pdf    #TEMPLATE FOR PPT
-
-├── LICENSE        
-
-├── README.md            # Project documentation
-
-├──Sync & Sense.pdf     # 6-slide hackathon presentation
-
-├── libraries.txt        # Wokwi library dependencies
-
-├── OFFLINE-sketch.ino           # Main application logic when system not connected with wifi 
-
-├── ONLINE-sketch.ino           # Main application logic when system connected with wifi 
-
-├── OFFLINE-diagram.json         # Wokwi circuit configurations
-
-└──  ONLINE-diagram.json         # Wokwi circuit configurations
-
+## Testing Stages & Future Scope
+- Current Limitation: Utilizing simulated inputs for RFID and IR sensors within the Wokwi environment.
+- Future Scope: Transitioning to MQ135 sensors and implementing ESP-NOW mesh networking for campus-wide scalability.
 
 
 
