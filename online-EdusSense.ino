@@ -1,14 +1,3 @@
-/**
- * @file Offline-EduSense.ino
- * @brief An automated environmental monitoring and safety system using ESP32-S3-WROOM.
- * @version 1.0
- * * Features:
- * - Real-time Environmental Telemetry (Temp/Hum/Smoke)
- * - Motion-based Automated Lighting & Occupancy Tracking
- * - Climate Control Automation (Relay-based Fan)
- * - Remote Manual Override via Blynk Dashboard
- */
-
 #define BLYNK_TEMPLATE_ID "TMPL34Wh926kz"
 #define BLYNK_TEMPLATE_NAME "smart classroom"
 #define BLYNK_PRINT Serial
