@@ -6,10 +6,10 @@ Unlike standard IoT prototypes, EduSense features an Offline Fail-Safe via a loc
 
 ## Quick Links
 - Live Simulation: offline: https://wokwi.com/projects/453951590301233153
-                 online : https://wokwi.com/projects/454308317695279104
+                 online : https://wokwi.com/projects/454308317695279105
   
 - Demo Video: https://youtu.be/xOdZIc2Vr3w?si=9I6aiPIF2jCoDdSJ
-- PPT - [https://wokwi.com/projects/453951590301233153](https://drive.google.com/file/d/1rt8J_P3dwdzIiIyb6-39oXyyhcr0vRHJ/view)
+- PPT : (https://drive.google.com/file/d/1rt8J_P3dwdzIiIyb6-39oXyyhcr0vRHJ/view)
 
 ## Key Features
 - **Climate Control**: Auto-activates Fan based on DHT22 thresholds.
