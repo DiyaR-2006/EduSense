@@ -46,12 +46,16 @@ int occupancyCount = 0;
 BLYNK_WRITE(V7) {
   int pinValue = param.asInt();
   digitalWrite(LED_PIN, pinValue);
+  Serial.print("Remote Light Toggle: ");
+  Serial.println(pinValue ? "ON" : "OFF");
 }
 
-// Button to turn Fan ON/OFF manually
+// Manual Fan Control from Dashboard (V8)
 BLYNK_WRITE(V8) {
   int pinValue = param.asInt();
   digitalWrite(RELAY_PIN, pinValue);
+  Serial.print("Remote Fan Toggle: ");
+  Serial.println(pinValue ? "ON" : "OFF");
 }
 
 /* -------- SEND DATA TO BLYNK -------- */
@@ -96,6 +100,8 @@ void loop() {
     delay(5000); 
   } else {
     digitalWrite(RELAY_PIN, LOW);  // Turn Fan OFF
+    Serial.println("Fan OFF");
+    delay(1000); 
   }
 
   // 2. MOTION AND LIGHT CONTROL
@@ -104,17 +110,17 @@ void loop() {
   if (motion == HIGH) {
     Serial.println("Motion Detected - Light ON");
     digitalWrite(LED_PIN, HIGH);
-    
+    delay(3000);   // Maintain light for visibility
+  } else {
+    digitalWrite(LED_PIN, LOW);
+    Serial.println("No motion - Energy Saving Mode");
+    delay(100);
+  }
     // Count how many times motion was detected
     occupancyCount++;
     Blynk.virtualWrite(V5, occupancyCount); // Update count on Blynk
     
-    delay(10000); // Keep light on for 3 seconds
-  } else {
-    digitalWrite(LED_PIN, LOW);
-    Serial.println("No motion - Light OFF");
-    delay(100);
-  }
+    delay(10000); // Keep delay of 10 seconds
 
   // 3. SMOKE ALARM
   int smokeVal = analogRead(SMOKE_PIN);
