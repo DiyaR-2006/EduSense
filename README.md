@@ -1,5 +1,5 @@
 ## EduSense
-Smart Classroom Ecosystem (ESP32-S3)
+Smart Classroom Ecosystem (ESP32)
 An IoT-enabled smart classroom system designed for energy efficiency and safety.
 EduSense is an IoT-driven solution designed to optimize the learning environment by monitoring AQI and smoke alert, temperature, and lighting while automating energy consumption. This project leverages the ESP32 microcontroller and Blynk IoT cloud to create a sustainable and responsive classroom.
 
@@ -13,11 +13,11 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 ## Hardware Setup
 - **Microcontroller**: ESP32-S3-wroom
 - **Sensors**: DHT22, PIR, MQ-2 (Analog)
-- **Actuators**: Relay, LED, Active Buzzer
+- **Actuators**: Relay (Used as proxy for simulating fan), LED, Active Buzzer
 - **Display**: 16x2 I2C LCD (Offline version)
 
 ## Software
-- C++ (Arduino Framework)
+- C++ 
 - Blynk IoT Cloud (Online version)
 - Wokwi (Simulation)
 
@@ -43,20 +43,22 @@ EduSense is an IoT-driven solution designed to optimize the learning environment
 - `LiquidCrystal I2C`
 
 ## Setup & Installation
+
 - Blynk Setup:
   --Create a new Template in Blynk.
-  --Define Datastreams (V0-V12) for sensors and actuators.
+  --Define Datastreams for sensors and actuators.
   --Copy your Template ID and Auth Token.
+  
 - Wokwi Simulation:
 - Open the diagram.json and sketch.ino in Wokwi.
 - Paste your Blynk credentials at the top of the sketch. Ensure libraries.txt includes: Blynk, DHT sensor library.
-- Run: Click the "Play" button in Wokwi and monitor the data on your Blynk mobile app.
+- Run: Click the "Play" button in Wokwi and monitor the data on your Blynk.
 
 ## Future Scope
 - Integration of AI for predictive energy usage analytics.
-- Centralized dashboard for school-wide facility management (B2B)
-
-  
+- Centralized dashboard for school-wide facility management (B2B).
+- Integrated RFID based attendance system.
+    
 ## 📁 Repository StructurePlaintext
 
 ├──Codezen 2026 ppt.pdf    #TEMPLATE FOR PPT
