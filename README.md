@@ -5,7 +5,7 @@ Unlike standard IoT prototypes, OmniSense features an Offline Fail-Safe via a lo
 
 ## Quick Links
 - Live Simulation: offline: (https://wokwi.com/projects/453951590301233153)
-                   online : https://wokwi.com/projects/454308317695279105
+                   online : (https://wokwi.com/projects/454308317695279105)
 - PPT : https://drive.google.com/file/d/1TBpnWHPXC3CQAIAg1BSrqCn0JTvKCuhO/view
 
 ## Key Features
