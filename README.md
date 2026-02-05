@@ -51,7 +51,7 @@ Unlike standard IoT prototypes, OmniSense features an Offline Fail-Safe via a lo
 
 ## Testing Stages & Future Scope
 - Current Limitation: Utilizing simulated inputs for RFID and IR sensors within the Wokwi environment.
-- Future Scope: Transitioning to MQ135 sensors and implementing ESP-NOW mesh networking for campus-wide scalability.
+- Future Scope: Transitioning to MQ135 sensors and implementing ESP-NOW mesh networking for wide scalability.
 
 
 
