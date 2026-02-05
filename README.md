@@ -4,10 +4,8 @@ OmniSense bridges the gap between traditional energy optimization, security and 
 Unlike standard IoT prototypes, OmniSense features an Offline Fail-Safe via a local LCD interface, ensuring that critical safety alerts and energy logic persist regardless of Wi-Fi stability. It’s more than a project- something we will be needing and using in the near future.
 
 ## Quick Links
-- Live Simulation: offline: https://wokwi.com/projects/453951590301233153
+- Live Simulation: offline: (https://wokwi.com/projects/453951590301233153)
                    online : https://wokwi.com/projects/454308317695279105
-  
-- Demo Video: https://youtu.be/xOdZIc2Vr3w?si=9I6aiPIF2jCoDdSJ
 - PPT : https://drive.google.com/file/d/1TBpnWHPXC3CQAIAg1BSrqCn0JTvKCuhO/view
 
 ## Key Features
