@@ -1,7 +1,6 @@
-## EduSense
-EduSense: An IoT-based Smart Classroom Ecosystem
+## OmniSense : Energy Optimization and Alert Smart System 
 
-EduSense bridges the gap between traditional education and smart-campus sustainability. By combining ESP32-based automation with Blynk IoT connectivity, we’ve created a low-cost, zero-invasive solution for energy management and student safety.
+OmniSense bridges the gap between traditional education and smart-campus sustainability. By combining ESP32-based automation with Blynk IoT connectivity, we’ve created a low-cost, zero-invasive solution for energy management and student safety.
 Unlike standard IoT prototypes, EduSense features an Offline Fail-Safe via a local LCD interface, ensuring that critical safety alerts and energy logic persist regardless of Wi-Fi stability. It’s more than a project; it’s a blueprint for the responsive campuses of tomorrow.
 
 ## Quick Links
